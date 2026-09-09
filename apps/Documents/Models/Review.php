@@ -29,9 +29,9 @@ class Review extends \Hubleto\Erp\Model
       'id_document' => (new Lookup($this, $this->translate("Document"), Document::class))->setRequired(),
       'id_version' => (new Lookup($this, $this->translate("Version"), Version::class))->setRequired(),
       'comment' => (new Varchar($this, $this->translate('Comment')))->setDefaultVisible(),
-      'requested_on' => (new DateTime($this, $this->translate('Requested on')))->setReadonly()->setDefaultVisible(),
-      'id_requested_by' => (new Lookup($this, $this->translate("Requested by"), User::class))->setDefaultVisible(),
-      'reviewed_on' => (new DateTime($this, $this->translate('Reviewed on')))->setReadonly()->setDefaultVisible(),
+      'requested_on' => (new DateTime($this, $this->translate('Requested on')))->setDefaultValue(date("Y-m-d H:i:s"))->setReadonly()->setDefaultVisible(),
+      'id_requested_by' => (new Lookup($this, $this->translate("Requested by"), User::class))->setDefaultValue($this->authProvider()->getUserId())->setDefaultVisible(),
+      'reviewed_on' => (new DateTime($this, $this->translate('Reviewed on')))->setDefaultVisible(),
       'id_reviewed_by' => (new Lookup($this, $this->translate("Reviewed by"), User::class))->setDefaultVisible(),
       'id_review_result' => (new Lookup($this, $this->translate("Review result"), ReviewResult::class))->setDefaultVisible(),
     ]);
@@ -53,8 +53,8 @@ class Review extends \Hubleto\Erp\Model
     if (!isset($record['uid'])) {
       $record['uid'] = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
     }
-    $record['requested_on'] = date('Y-m-d H:i:s');
-    $record['id_requested_by'] = $this->authProvider()->getUserId();
+    // $record['requested_on'] = date('Y-m-d H:i:s');
+    // $record['id_requested_by'] = $this->authProvider()->getUserId();
 
     return $record;
   }

@@ -32,23 +32,34 @@ const TabDefault = (props: FormDocumentProps) => {
       <div className='card'>
         <div className='card-header'>{T.translate('Versions')}</div>
         <div className='card-body'>
-          <TableVersions
-            tag={"table_documents_versions"}
-            parentForm={form}
-            // readonly={true}
-            uid={props.uid + "_table_documents_versions"}
-            idDocument={form.id}
-          />
+          {form.id > 0 ?
+            <TableVersions
+              tag={"table_documents_versions"}
+              parentForm={form}
+              // readonly={true}
+              uid={props.uid + "_table_documents_versions"}
+              idDocument={form.id}
+            />
+          :
+            <div className="badge badge-info">{T.translate('First create the document to add document versions.')}</div>
+          }
         </div>
       </div>
     </div>
-    <div className='flex-1'>
-      <TableReviews
-        tag={"table_documents_reviews"}
-        parentForm={form}
-        uid={props.uid + "_table_documents_reviews"}
-        idDocument={form.id}
-      />
+    <div className='card flex-1'>
+        <div className='card-header'>{T.translate('Reviews')}</div>
+        <div className='card-body'>
+          {form.id > 0 ?
+            <TableReviews
+              tag={"table_documents_reviews"}
+              parentForm={form}
+              uid={props.uid + "_table_documents_reviews"}
+              idDocument={form.id}
+            />
+          :
+            <div className="badge badge-info">{T.translate('First create the document to add document reviews.')}</div>
+          }
+        </div>
     </div>
   </div>
 }

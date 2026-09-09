@@ -96,7 +96,7 @@ const FileBrowser = (props: FileBrowserProps) => {
     return <Modal
       uid='create_sub_folder_modal'
       isOpen={true}
-      type='right'
+      type={'right ' + (model === documentModel ? "wide" : "")}
     >
       {model === documentModel ?
         <FormDocument {...props}></FormDocument>

@@ -147,13 +147,14 @@ class Loader extends \Hubleto\Erp\App
    * [Description for renderSecondSidebar]
    *
    * @return string
-   * 
+   *
    */
   public function renderSecondSidebar(): string
   {
     return '
       ' . $this->secondSidebarTitle() . '
       <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('documents', 'fas fa-file', 'Documents') . '
         ' . $this->secondSidebarButton('documents/versions', 'fas fa-arrow-down-1-9', 'Versions') . '
         ' . $this->secondSidebarButton('documents/reviews', 'fas fa-spell-check', 'Reviews') . '
         ' . $this->secondSidebarButton('documents/templates', 'fas fa-file', 'Templates') . '

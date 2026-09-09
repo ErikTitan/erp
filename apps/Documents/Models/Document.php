@@ -32,7 +32,7 @@ class Document extends \Hubleto\Erp\Model
       'model' => (new Varchar($this, $this->translate('Model')))->setReadonly()->setDefaultVisible(),
       'record_id' => (new Integer($this, $this->translate('RecordId')))->setReadonly()->setDefaultVisible(),
       'created_on' => (new DateTime($this, $this->translate('Created on')))->setReadonly()->setDefaultVisible(),
-      'id_created_by' => (new Lookup($this, $this->translate("Created by"), User::class))->setDefaultVisible(),
+      'id_created_by' => (new Lookup($this, $this->translate("Created by"), User::class))->setDefaultValue($this->authProvider()->getUserId())->setDefaultVisible(),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
     ]);
@@ -63,7 +63,7 @@ class Document extends \Hubleto\Erp\Model
 
     return $record;
   }
-  
+
   public function onAfterCreate(array $savedRecord): array
   {
     $savedRecord = parent::onAfterCreate($savedRecord);
