@@ -157,6 +157,7 @@ class Loader extends \Hubleto\Erp\App
         ' . $this->secondSidebarButton('documents', 'fas fa-file', 'Documents') . '
         ' . $this->secondSidebarButton('documents/versions', 'fas fa-arrow-down-1-9', 'Versions') . '
         ' . $this->secondSidebarButton('documents/reviews', 'fas fa-spell-check', 'Reviews') . '
+        ' . $this->secondSidebarButton('documents/review-results', 'fas fa-cog', 'Review results') . '
         ' . $this->secondSidebarButton('documents/templates', 'fas fa-file', 'Templates') . '
         <br/>
         ' . $this->secondSidebarButton('documents/files', 'fas fa-list', 'File manager') . '

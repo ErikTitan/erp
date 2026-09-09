@@ -33,4 +33,16 @@ class Version extends \Hubleto\Erp\RecordManager
     return $query;
   }
 
+  public function prepareLookupQuery(string $search): mixed
+  {
+    $query = parent::prepareLookupQuery($search);
+
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $idDocument = $hubleto->router()->urlParamAsInteger("idDocument");
+
+    if ($idDocument > 0) $query = $query->where($this->table . '.id_document', $idDocument);
+
+    return $query;
+  }
+
 }

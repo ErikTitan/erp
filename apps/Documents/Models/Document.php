@@ -31,7 +31,7 @@ class Document extends \Hubleto\Erp\Model
       'name' => (new Varchar($this, $this->translate('Document name')))->setRequired()->setDefaultVisible(),
       'model' => (new Varchar($this, $this->translate('Model')))->setReadonly()->setDefaultVisible(),
       'record_id' => (new Integer($this, $this->translate('RecordId')))->setReadonly()->setDefaultVisible(),
-      'created_on' => (new DateTime($this, $this->translate('Created on')))->setReadonly()->setDefaultVisible(),
+      'created_on' => (new DateTime($this, $this->translate('Created on')))->setDefaultValue(date("Y-m-d H:i:s"))->setReadonly()->setDefaultVisible(),
       'id_created_by' => (new Lookup($this, $this->translate("Created by"), User::class))->setDefaultValue($this->authProvider()->getUserId())->setDefaultVisible(),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
@@ -58,8 +58,8 @@ class Document extends \Hubleto\Erp\Model
       $record['uid'] = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
     }
 
-    $record['created_on'] = date('Y-m-d H:i:s');
-    $record['id_created_by'] = $this->authProvider()->getUserId();
+    // $record['created_on'] = date('Y-m-d H:i:s');
+    // $record['id_created_by'] = $this->authProvider()->getUserId();
 
     return $record;
   }

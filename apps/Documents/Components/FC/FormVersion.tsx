@@ -24,14 +24,21 @@ const TabDefault = (props: FormVersionProps) => {
       <Input field='created_on' />
       <Input field='id_created_by' />
     </div>
-    <div className='flex-1'>
-      <TableReviews
-        tag={"table_documents_versions_reviews"}
-        parentForm={form}
-        uid={props.uid + "_table_documents_versions_reviews"}
-        idDocument={props.id}
-        idVersion={props.id}
-      />
+    <div className='card flex-1'>
+        <div className='card-header'>{T.translate('Reviews')}</div>
+        <div className='card-body'>
+          {form.id > 0 ?
+            <TableReviews
+              tag={"table_documents_versions_reviews"}
+              parentForm={form}
+              uid={props.uid + "_table_documents_versions_reviews"}
+              idDocument={form.getRecord().id_document}
+              idVersion={form.id}
+            />
+          :
+            <div className="badge badge-info">{T.translate('First create the document version to add document reviews.')}</div>
+          }
+        </div>
     </div>
   </div>;
 }
@@ -45,7 +52,7 @@ const FormVersion = (props: FormVersionProps) => {
     urlSlug='documents/versions'
     endpointParams={{}}
     onAfterFormInitialized={(form: any) => {}}
-    title={{field: 'name', sub: T.translate('Version')}}
+    title={{field: 'version', sub: T.translate('Version')}}
     tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}
   ></Form>;

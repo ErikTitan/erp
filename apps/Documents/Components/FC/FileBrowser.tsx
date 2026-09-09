@@ -200,7 +200,7 @@ const FileBrowser = (props: FileBrowserProps) => {
           >
             <span className="text flex items-center gap-1">
               <span className="truncate max-w-[150px]">{item.name}</span>
-              {isLast ? <i className='fa fa-chevron-down'></i> : <></>}
+              {isLast && folderUid != documentFolder ? <i className='fa fa-chevron-down'></i> : <></>}
             </span>
           </button>;
         })}
@@ -277,6 +277,27 @@ const FileBrowser = (props: FileBrowserProps) => {
 
       <div className="flex gap-2 mt-2">
         {/* folders */}
+        {/* Show the documents folder for the entries in the Document model */}
+        {folderUid === "_ROOT_" ?
+          <button
+            key={documentFolder}
+            className={"relative btn btn-square w-32 btn-light"}
+            onClick={(e) => {
+              let newFolderUid = documentFolder;
+              let newPath = path;
+              newPath.push({
+                id_parent_folder: 1,
+                name:"Documents",
+                uid: newFolderUid
+              });
+              changeFolder(newFolderUid, newPath);
+            }}
+          >
+            <span className="icon"><i className="fas fa-folder"></i></span>
+            <div className="text line-clamp-2 w-full break-words">Documents</div>
+          </button>
+        : <></>}
+
         {folderContent.subFolders ? folderContent.subFolders.map((item, index) => {
           const isSelected = selectedFolders.includes(item.id);
           return <button
@@ -301,25 +322,7 @@ const FileBrowser = (props: FileBrowserProps) => {
             <div className="text line-clamp-2 w-full break-words">{item.name ?? ''}</div>
           </button>
         }) : null}
-        {folderUid === "_ROOT_" ?
-          <button
-            key={documentFolder}
-            className={"relative btn btn-square w-32 btn-light"}
-            onClick={(e) => {
-              let newFolderUid = documentFolder;
-              let newPath = path;
-              newPath.push({
-                id_parent_folder: 1,
-                name:"Documents",
-                uid: newFolderUid
-              });
-              changeFolder(newFolderUid, newPath);
-            }}
-          >
-            <span className="icon"><i className="fas fa-folder"></i></span>
-            <div className="text line-clamp-2 w-full break-words">Documents</div>
-          </button>
-        : <></>}
+
 
         {/* files */}
         {folderContent.files ? folderContent.files.map((item, index) => {

@@ -2,7 +2,7 @@ import React from 'react'
 import Translator from '@hubleto/react-ui/core/Translator';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { TableMeta, TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
-import FormReview, { FormReviewProps } from './FormReview';
+import FormReview  from './FormReview';
 
 interface TableReviewsProps extends TableProps {
   idDocument?: number,

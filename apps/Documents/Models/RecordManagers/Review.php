@@ -39,8 +39,10 @@ class Review extends \Hubleto\Erp\RecordManager
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
     $idDocument = $hubleto->router()->urlParamAsInteger("idDocument");
+    $idVersion = $hubleto->router()->urlParamAsInteger("idVersion");
 
     if ($idDocument > 0) $query = $query->where($this->table . '.id_document', $idDocument);
+    if ($idVersion > 0) $query = $query->where($this->table . '.id_version', $idVersion);
 
     return $query;
   }
