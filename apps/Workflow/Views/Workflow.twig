@@ -35,8 +35,8 @@
           <div class="card-body flex gap-2">
             {% for u in viewParams.users %}
               <a
-                class="btn {{ u.id == viewParams.fUser ? "btn-primary" : "btn-transparent" }}"
-                href="?fUser={{ u.id }}"
+                class="btn {{ u.id == viewParams.fOwner ? "btn-primary" : "btn-transparent" }}"
+                href="?fOwner={{ u.id }}"
               >
                 <span class="text">
                   {{ u.nick }}

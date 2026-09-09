@@ -17,7 +17,7 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
     ;
 
     if ($fOwner > 0) {
-      $items = $items->where('id_owner', $fOwner);
+      $items = $items->where($mLead->table . '.id_owner', $fOwner);
     }
 
     $items = $items->get()?->toArray();
@@ -29,5 +29,5 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
 
     return $items;
   }
-  
+
 }

@@ -22,7 +22,7 @@ class Workflow extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $fUser = $this->router()->urlParamAsInteger('fUser');
+    $fOwner = $this->router()->urlParamAsInteger('fOwner');
 
     /** @var User */
     $mUser = $this->getModel(User::class);
@@ -48,7 +48,7 @@ class Workflow extends \Hubleto\Erp\Controller
 
       $this->viewParams["workflow"] = $workflow;
 
-      $items = ($workflowLoader ? $workflowLoader->loadItems($idWorkflow, ['fUser' => $fUser]) : []);
+      $items = ($workflowLoader ? $workflowLoader->loadItems($idWorkflow, ['fOwner' => $fOwner]) : []);
 
       foreach ($items as $key => $item) {
         $items[$key]['_UID'] = md5($key . rand(0, 999999));
@@ -59,7 +59,7 @@ class Workflow extends \Hubleto\Erp\Controller
 
     $this->viewParams["workflows"] = $workflows;
     $this->viewParams["users"] = $users;
-    $this->viewParams["fUser"] = $fUser;
+    $this->viewParams["fOwner"] = $fOwner;
 
     $this->setView('@Hubleto:App:Community:Workflow/Workflow.twig');
   }
